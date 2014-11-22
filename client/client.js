@@ -2,7 +2,7 @@ var auth_url = 'https://accounts.spotify.com/authorize'
 
 var data = {
   response_type: 'token',
-  client_id: '54439c7186f44fd89c42fe6d057bdb32',
+  client_id: '3c03b59c6cc2404aa818748e9250ed47',
   redirect_uri: 'http://localhost:3000/callback',
   scope: 'user-read-private user-read-email',
   show_dialog: true
@@ -27,6 +27,7 @@ Router.route('/', function() {
 })
 
 Router.route('/callback', function() {
+  console.log('asdf');
   var hash = this.params.hash;
   debugger
   if(hash) {
