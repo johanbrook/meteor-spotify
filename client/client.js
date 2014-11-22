@@ -9,6 +9,8 @@ var data = {
 }
 
 Router.onBeforeAction(function() {
+
+  console.log('onBeforeAction');
   if(!Tokens.isAuthed()) {
     this.render('login')
   }
@@ -17,9 +19,11 @@ Router.onBeforeAction(function() {
     Spotify.setAccessToken(token)
     this.next()
   }
-})
+
+}, { except: ['callback'] })
 
 Router.route('/', function() {
+  console.log('home');
   Spotify.getMe().then(function(data) {
     console.log(data)
   })
@@ -27,9 +31,8 @@ Router.route('/', function() {
 })
 
 Router.route('/callback', function() {
-  console.log('asdf');
+  console.log('callback');
   var hash = this.params.hash;
-  debugger
   if(hash) {
     var data = Helpers.queryToObject(hash)
     Tokens.insert({token: data.access_token})
